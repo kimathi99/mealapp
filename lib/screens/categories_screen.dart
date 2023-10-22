@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:meals/data/dummy_data.dart';
 import 'package:meals/models/category.dart';
+import 'package:meals/models/meals.dart';
 import 'package:meals/screens/meals_screen.dart';
 import 'package:meals/widgets/category_grid_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  const CategoriesScreen({
+    super.key,
+    required this.onToggleFavourite,
+  });
+  final void Function(Meal meal) onToggleFavourite;
   void _selectedCategory(BuildContext context, Category category) {
     // context is not globally available in statless
     // Navigator.push(context ,route)
@@ -16,6 +21,7 @@ class CategoriesScreen extends StatelessWidget {
         builder: (ctx) => MealsScreen(
               title: category.title,
               meals: filteredMeals,
+              onToggleFavourite: onToggleFavourite,
             )));
   }
 
