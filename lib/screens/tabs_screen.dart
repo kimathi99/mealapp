@@ -3,6 +3,7 @@ import 'package:meals/models/meals.dart';
 import 'package:meals/screens/categories_screen.dart';
 import 'package:meals/screens/meals_screen.dart';
 import 'package:meals/widgets/main_drawer.dart';
+import 'package:meals/screens/filter_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -45,10 +46,13 @@ class _TabsScreenState extends State<TabsScreen> {
     });
   }
 
-  void _setSreen(String identifier) {
+  void _setSreen(String identifier) async {
+    Navigator.of(context).pop();
     if (identifier == 'filters') {
-    } else {
-      Navigator.of(context).pop();
+      final result = await Navigator.of(context).push<Map<Filter, bool>>(
+        MaterialPageRoute(builder: (ctx) => const FiltersScreen()),
+      );
+      print(result);
     }
   }
 
